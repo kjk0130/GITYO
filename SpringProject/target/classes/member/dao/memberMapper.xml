@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="memberSQL">
+ 	<!-- 로그인 -->
+ 	<select id="login" parameterType="java.util.Map" resultType="member">
+ 		select * from member where id=#{id} and pwd=#{pwd}
+ 	</select>
+ 	
+ 	<!-- 중복체크 -->
+ 	<select id="checkId" parameterType="String" resultType="member">
+ 		select * from member where id=#{id}
+ 	</select>
+ 	
+ 	<!-- 회원가입 -->
+ 	<insert id="write" parameterType="member">
+ 		insert into member values(#{name}
+	 							,#{id}
+	 							,#{pwd}
+	 							,#{gender}
+	 							,#{email1}
+	 							,#{email2}
+	 							,#{tel1}
+	 							,#{tel2}
+	 							,#{tel3}
+	 							,#{zipcode}
+	 							,#{addr1}
+	 							,#{addr2}
+	 							,sysdate)
+ 	</insert>
+ 	
+ 	<!-- 우편번호 -->
+ 	<select id="postSearch" parameterType="java.util.Map" resultType="post">
+ 		select * from newzipcode 
+ 		where sido like '%'||#{sido}||'%' and
+ 			  nvl(sigungu,'-') like '%'||#{sigungu}||'%' and
+ 			  roadname like '%'||#{roadname}||'%' 
+ 	</select>
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
